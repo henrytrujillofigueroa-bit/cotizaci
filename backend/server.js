@@ -8,7 +8,11 @@ app.use(express.json());
 app.post("/login", (req, res) => {
   const { usuario, clave } = req.body;
 
-  if (usuario?.trim().toLowerCase() === "admin" && clave?.trim() === "1234") {
+  // Normalizamos los datos (quitamos espacios y pasamos a minúsculas)
+  const user = usuario?.trim().toLowerCase();
+  const pass = clave?.trim();
+
+  if (user === "ronalsrl" && pass === "997851088ntF$") {
     res.json({ ok: true });
   } else {
     res.status(401).json({ error: "Credenciales inválidas" });
