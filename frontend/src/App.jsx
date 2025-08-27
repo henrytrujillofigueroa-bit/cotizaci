@@ -14,7 +14,7 @@ function App() {
   const manejarLogin = async (e) => {
     e.preventDefault();
     try {
-      const respuesta = await fetch("https://ronaladm2014.onrender.com", {
+      const respuesta = await fetch("https://ronaladm2014.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ usuario, clave }),

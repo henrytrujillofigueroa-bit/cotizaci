@@ -7,7 +7,8 @@ app.use(express.json());
 
 app.post("/login", (req, res) => {
   const { usuario, clave } = req.body;
-  if (usuario === "admin" && clave === "1234") {
+
+  if (usuario?.trim().toLowerCase() === "admin" && clave?.trim() === "1234") {
     res.json({ ok: true });
   } else {
     res.status(401).json({ error: "Credenciales inválidas" });
