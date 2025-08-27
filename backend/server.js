@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 
 app.post("/login", (req, res) => {
   const { usuario, clave } = req.body;
-  if (usuario === "ronalsrl" && clave === "997851088ntF$") {
+  if (usuario === "admin" && clave === "1234") {
     return res.json({ mensaje: "Login correcto", usuario });
   } else {
     return res.status(401).json({ mensaje: "Credenciales inválidas" });
