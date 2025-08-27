@@ -14,7 +14,7 @@ function App() {
   const manejarLogin = async (e) => {
     e.preventDefault();
     try {
-      const respuesta = await fetch("http://localhost:3000/login", {
+      const respuesta = await fetch("https://mi-backend.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ usuario, clave }),
