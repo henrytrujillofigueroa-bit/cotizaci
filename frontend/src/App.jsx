@@ -31,15 +31,6 @@ function App() {
     }
   };
 
-   // ✅ Si está logueado → toda la app de cotización
-  const generarNumeroCotizacion = () => {
-    const anio = new Date().getFullYear();
-    const ultimoNumero = localStorage.getItem('ultimaCotizacion') || 21441;
-    const nuevoNumero = parseInt(ultimoNumero) + 1;
-    localStorage.setItem('ultimaCotizacion', nuevoNumero);
-    return `${anio}-${nuevoNumero.toString().padStart(5, '0')}`;
-  };
-
   const [items, setItems] = useState([
     { cantidad: 1, unidad: "Unidad", descripcion: "", precio: 0 },
   ]);
@@ -52,7 +43,7 @@ function App() {
     ciudad: "",
     telefono: "",
     direccion: "",
-    anioSerie: "",
+    anioSerie: "2025-0001",
     revision: "1",
     garantia: "",
     entrega: "",
@@ -107,9 +98,8 @@ function App() {
   };
 
   const generarPDF = () => {
-    const nuevoNumero = generarNumeroCotizacion();
-    setCotizacion(prev => ({ ...prev, anioSerie: nuevoNumero }));
-
+    const numeroCotizacion = cotizacion.anioSerie;
+   
     const body = [
       [
         { text: "Cantidad", fillColor: "#f0f0f0", bold: true, fontSize: 12, alignment: "center", color: "#000000"},
@@ -165,7 +155,7 @@ function App() {
                 widths: ["*"],
                 body: [
                   [{ text: "COTIZACIÓN", bold:true, fontSize:20, alignment: "center", fillColor: "#f0f0f0", border: [false,false,false,false]}],
-                  [{ text: nuevoNumero, fontSize:14, alignment: "center", color: "#000000" }],
+                  [{ text: numeroCotizacion, fontSize:14, alignment: "center", color: "#000000" }],
                   [{ text: `Rev-${cotizacion.revision}`, fontSize:12, alignment: "center", color: "#000000" }],
                 ],
               },
@@ -312,8 +302,8 @@ function App() {
           <input type="text" placeholder="Ciudad" value={cotizacion.ciudad} onChange={(e) => setCotizacion({ ...cotizacion, ciudad: e.target.value })} className="border p-3 rounded focus:ring-2 focus:ring-blue-400" />
           <input type="text" placeholder="Teléfono" value={cotizacion.telefono} onChange={(e) => setCotizacion({ ...cotizacion, telefono: e.target.value })} className="border p-3 rounded focus:ring-2 focus:ring-blue-400" />
           <input type="text" placeholder="Dirección" value={cotizacion.direccion} onChange={(e) => setCotizacion({ ...cotizacion, direccion: e.target.value })} className="border p-3 rounded col-span-2 focus:ring-2 focus:ring-blue-400" />
-          <input type="text" placeholder="Año-#### (Serie)" value={cotizacion.anioSerie} readOnly className="border p-3 rounded focus:ring-2 focus:ring-blue-400" />
-          <input type="text" placeholder="Rev-#" value={cotizacion.revision} readOnly className="border p-3 rounded focus:ring-2 focus:ring-blue-400" />
+          <input type="text" placeholder="Año-#### (Serie)" value={cotizacion.anioSerie} onChange={(e) => setCotizacion({ ...cotizacion, anioSerie: e.target.value })} className="border p-3 rounded focus:ring-2 focus:ring-blue-400" />
+          <input type="text" placeholder="Rev-#" value={cotizacion.revision} onChange={(e) => setCotizacion({ ...cotizacion, revision: e.target.value })} className="border p-3 rounded focus:ring-2 focus:ring-blue-400" />
         </div>
 
         {/* Ítems */}
