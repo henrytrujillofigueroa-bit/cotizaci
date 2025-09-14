@@ -249,7 +249,7 @@ function App() {
       },
     };
 
-    pdfMake.createPdf(docDefinition).download(`Cotizacion_${nuevoNumero}.pdf`);
+    pdfMake.createPdf(docDefinition).download(`Cotizacion_${numeroCotizacion}.pdf`);
   };
  if (!logueado) {
     return (
